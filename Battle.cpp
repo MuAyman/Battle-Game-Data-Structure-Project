@@ -33,7 +33,7 @@ Castle * Battle::GetCastle()
 
 void Battle::RunSimulation()
 {
-//	pGUI = new GUI;
+	pGUI = new GUI;
 	PROG_MODE	mode = pGUI->getGUIMode();
 		
 	switch (mode)	//Add a function for each mode in next phases
@@ -138,7 +138,7 @@ void Battle::Just_A_Demo()
 	int Enemy_id = 0;
 	int ArrivalTime=1;
 	Enemy* pE= NULL;
-	//Create Random enemies and add them all to inactive queue 
+	//Create Random enemies and add them all to inactive queue
 	for(int i=0; i<EnemyCount; i++)
 	{			
 		ArrivalTime += (rand()%3);	//Randomize arrival time
