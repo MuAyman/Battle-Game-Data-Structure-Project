@@ -51,13 +51,16 @@ private :
 	
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
+	//Node<T>* spinningPtr;
 public :
 	Queue();	
 	bool isEmpty() const ;
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);  
 	bool peekFront(T& frntEntry)  const;
-	
+	bool peek_from_any_index(T& spinning_Entry, int index) const;
+	bool delete_index_in_any_index(T& deleted_Entry, int index);
+
 	//toArray function to be used ONLY when drawing the queue items
 	const T* toArray(int& count);	//returns array of T (array of items)
 
@@ -172,7 +175,74 @@ bool Queue<T>:: peekFront(T& frntEntry) const
 
 }
 ///////////////////////////////////////////////////////////////////////////////////
+//Riiiiiham
+/*
+Function: peek_from_any_index
+gets a pointer to any element of this queue. The operation does not modify the queue.
 
+Input: The index of the item needed.
+Output: The item needed of the queue.
+return: flase if Queue is empty
+*/
+template <typename T>
+bool Queue<T>::peek_from_any_index(T& spinning_Entry, int index) const
+{
+	Node<T>* spinning_ptr;
+	int I = 0;
+	if (isEmpty())
+	{
+		return false;
+		spinning_ptr = NULL;
+	}
+	else
+	{
+		spinning_ptr = frontPtr;
+		while (spinning_ptr && I < index - 1)
+		{
+			spinning_ptr = spinning_ptr->getNext();
+			I++;
+		}
+		spinning_Entry = spinning_ptr->getItem();
+		return true;
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+// Riham :)))
+/*Function: delete_index_in_any_index
+Removes the element of this index in the queue.
+Input: The index of element wanted to be deleted.
+Output: True if the operation is successful; otherwise false.
+*/
+
+template <typename T>
+bool Queue<T>::delete_index_in_any_index(T& deleted_Entry, int index)
+{
+	Node<T>* pre_spinning_ptr = frontPtr;
+	Node<T>* spinning_ptr = pre_spinning_ptr->getNext();
+	Node<T>* spinning_ptr_Next = spinning_ptr->getNext();
+	int I = 0;
+	if (isEmpty())
+	{
+		return false;
+		spinning_ptr = NULL;
+	}
+	else
+	{
+		while (spinning_ptr && I < index - 2)
+		{
+			pre_spinning_ptr = pre_spinning_ptr->getNext();
+			spinning_ptr = pre_spinning_ptr->getNext();
+			spinning_ptr_Next = spinning_ptr->getNext();
+			I++;
+		}
+		pre_spinning_ptr->setNext(spinning_ptr_Next);
+		delete spinning_ptr;
+		return true;
+	}
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
 template <typename T>
 Queue<T>::~Queue()
 {
