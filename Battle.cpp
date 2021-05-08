@@ -1,5 +1,9 @@
 #include "Battle.h"
+#include <iostream>
+#include <fstream>
+#include <stdio.h>
 #include <time.h>
+using namespace std;
 
 Battle::Battle()
 {	
@@ -49,6 +53,69 @@ void Battle::RunSimulation()
 	
 }
 
+
+bool Battle::LoadingFunction()
+{
+	string name;
+	pGUI->PrintMessage("Enter the loading file path: ");
+	name = pGUI->GetString();
+
+	ifstream File;
+	File.open(name, ios::in);
+
+	if (File.fail())
+		return false;
+	else
+	{
+		double h, n , p, c;
+		File >> h >> n >> p >> c;
+		BCastle.SetHealth(h);				//Setting castle health
+		BCastle.SetN(n);					//Setting castle N enemeies to attack at each time 
+		BCastle.SetPower(p);				//Setting castle power
+		EnemyCount = c;						//Setting enemy count
+	
+		for (int i = 1; i < EnemyCount; i++)
+		{
+			File >> h;
+			AllEnemies[i].SetID(h);				//Setting enemy id
+			
+			File >> h;
+			AllEnemies[i].SetStatus((ENMY_STATUS)h);	//Setting enemy type
+
+			File >> h;
+			AllEnemies[i].SetAT(h);						//Setting enemy arrival time
+
+			File >> h;
+			AllEnemies[i].SetH(h);						//Setting enemy health
+
+			File >> h;
+			AllEnemies[i].SetPOW(h);					//Setting enemy power
+
+			File >> h;
+			AllEnemies[i].SetRLD(h);					//Setting enemy reload time
+
+			File >> h;
+			AllEnemies[i].SetSPD(h);					//Setting enemy speed
+		}
+	}
+}
+
+void Battle::SimpleSimulator()
+{
+	
+}
+
+
+void Battle::castleAttack()
+{
+
+}
+
+
+void Battle::enemiesAttack()
+{
+
+}
 
 //This is just a demo function for project introductory phase
 //It should be removed in phases 1&2
@@ -103,10 +170,23 @@ void Battle::Just_A_Demo()
 void Battle::AddAllListsToDrawingList()
 {	
 	//Add inactive queue to drawing list
-	int InactiveCount;
-	Enemy* const * EnemyList = Q_Inactive.toArray(InactiveCount);
-	for(int i=0; i<InactiveCount; i++)
-		pGUI->AddToDrawingList(EnemyList[i]);
+
+	Enemy* const * InactiveList = Q_Inactive.toArray(InactiveCount);
+	for (int i = 0; i < InactiveCount; i++)
+		pGUI->AddToDrawingList(InactiveList[i]);
+
+	Enemy* const* ActiveList = Q_Active.toArray(ActiveCount);
+	for (int i = 0; i < ActiveCount; i++)
+		pGUI->AddToDrawingList(ActiveList[i]);
+
+	Enemy* const* FrostedList = Q_Frosted.toArray(FrostedCount);
+	for (int i = 0; i < FrostedCount; i++)
+		pGUI->AddToDrawingList(FrostedList[i]);
+
+	Enemy* const* KilledList = Q_Killed.toArray(KilledCount);
+	for (int i = 0; i < KilledCount; i++)
+		pGUI->AddToDrawingList(KilledList[i]);
+
 
 	//Add other lists to drawing list
 	//TO DO

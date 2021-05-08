@@ -10,27 +10,30 @@ class Enemy
 {
 
 protected:
-	const int ID;         //Each enemy has a unique ID (sequence number)
-	const int ArrvTime;	//arrival time (time it starts to join battle)
+	int ID;         //Each enemy has a unique ID (sequence number)
+	int ArrvTime;	//arrival time (time it starts to join battle)
 
 	ENMY_STATUS status;	    //status of the enemy (inactive, inactive, frosted, killed)
 	int Distance;	//Horizontal distance between enemy & the tower of its region
 	                //Always positive (ranges from 2 to 60)
-	double Health;	//Enemy health
-
+	double Health, Power, ReloadSpeed, Speed;
 	
-	//
-	// TODO: Add More Data Members As Needed
-	//
 
 public:
-	Enemy(int id, int arrTime, int d = MaxDistance);
+	Enemy(int id=0, int arrTime=0, int d = MaxDistance);
 	virtual ~Enemy();
 
 	int Enemy::GetID() const;
 	ENMY_STATUS GetStatus() const;
-	void SetStatus(ENMY_STATUS);
-	
+	void SetStatus(ENMY_STATUS s);
+	void SetID(double id);
+	void SetAT(double arrival);
+	void SetH(double health);
+	void SetPOW(double power);
+	void SetRLD(double reload);
+	void SetSPD(double speed);
+
+
 	void DecrementDist();
 
 	void SetDistance(int );

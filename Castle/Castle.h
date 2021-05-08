@@ -2,20 +2,18 @@
 #include "..\Defs.h"
 class Castle
 {
-	double Health;
+	double Health, power, N;
 
-	//
-	// TODO: Add More Data Members As Needed
-	//
 
 public:
 
 	void SetHealth(double h);
+	void SetPower(double p);
+	void SetN(double n);
+	double GetPower() const;
+	double GetN() const;
 	double GetHealth() const;
 
-	//
-	// TODO: Add More Member Functions As Needed
-	//
 
 };
 
