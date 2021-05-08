@@ -1,6 +1,6 @@
 #pragma once
 #include "..\Defs.h"
-#include "D:\ZC\Spring 21\Data Structures\Project\CIE205Project_Code_S2021\Enemies\Enemy.h"
+#include "../Enemies/Enemy.h"
 class Castle
 {
 	double Health, power, N;
@@ -9,12 +9,12 @@ class Castle
 
 	//
 	// TODO: Add More Data Members As Needed
-	int Num_f_attacks; 
+	int Num_f_attacks;
 	const int location = 0; // determine the locatin of castle from enemies
 	int Ice; // Number of ice fires Castle fires
 	int Fire; // Number of fires Castle fires
 	bool Frosted; //If Castle frosted or not
-	double Total_damage; //Damage caused by all enemies 
+	double Total_damage; //Damage caused by all enemies
 	double Caste_Power;
 
 	//
@@ -43,4 +43,3 @@ public:
 
 
 };
-
