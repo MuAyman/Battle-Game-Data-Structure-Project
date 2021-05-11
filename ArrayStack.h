@@ -18,7 +18,7 @@ private:
 
 public:
 
-	ArrayStack(int MaxSize) : STACK_SIZE(MaxSize)
+	ArrayStack(int MaxSize=0) : STACK_SIZE(MaxSize)
 	{
 		items = new T[STACK_SIZE];
 		top = -1;
