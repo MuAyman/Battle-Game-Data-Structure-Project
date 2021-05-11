@@ -1,1 +1,57 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(411,5): error MSB8020: The build tools for Visual Studio 2012 (Platform Toolset = 'v110') cannot be found. To build using the v110 build tools, please install Visual Studio 2012 build tools.  Alternatively, you may upgrade to the current Visual Studio tools by selecting the Project menu or right-click the solution, and then selecting "Retarget solution".
+﻿cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  Battle.cpp
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\Battle.cpp(67,16): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\Battle.cpp(102,15): warning C4552: '+': result of expression not used
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\Battle.cpp(103,21): warning C4552: '-': result of expression not used
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\Battle.cpp(107,21): warning C4552: '+': result of expression not used
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\Battle.cpp(108,15): warning C4552: '-': result of expression not used
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\Battle.cpp(111,14): warning C4552: '+': result of expression not used
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\Battle.cpp(112,15): warning C4552: '-': result of expression not used
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\Battle.cpp(113,21): warning C4552: '-': result of expression not used
+  Generating Code...
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\Battle.cpp(93): warning C4715: 'Battle::LoadingFunction': not all control paths return a value
+  Compiling...
+  Demo_Main.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  GUI.cpp
+cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  jutils.c
+  jquant2.c
+  jquant1.c
+  jmemnobs.c
+  jmemmgr.c
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\CMUgraphicsLib\jpeg\jmemmgr.c(1103,19): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\CMUgraphicsLib\jpeg\jmemmgr.c(1106,11): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  jidctred.c
+  jidctint.c
+  jidctfst.c
+  jidctflt.c
+  jerror.c
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\CMUgraphicsLib\jpeg\jerror.c(169,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\CMUgraphicsLib\jpeg\jerror.c(171,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  jdtrans.c
+  jdsample.c
+  jdpostct.c
+  jdphuff.c
+  jdmerge.c
+  jdmaster.c
+  jdmarker.c
+  jdmainct.c
+  jdinput.c
+  jdhuff.c
+  Generating Code...
+  Compiling...
+  jddctmgr.c
+  jdcolor.c
+  jdcoefct.c
+  jdatasrc.c
+  jdapistd.c
+  jdapimin.c
+  jcparam.c
+  jcomapi.c
+  jpegload.c
+E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\CMUgraphicsLib\jpegload.c(23,12): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Generating Code...
+Battle.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  CastleDSProject.vcxproj -> E:\ZC\Courses Material\3 Spring\Data Structure\Project\CIE205Project_Code_S2021\Debug\CastleDSProject.exe

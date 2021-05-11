@@ -23,7 +23,7 @@ private:
 	Priority_Queue<Enemy*> ActiveFighter;	//Priority Queue of active fighters
 	ArrayStack<Enemy*> ActiveHlealer;		//Stack of active Healer
 	Queue<Enemy*> ActiveFreezer;			//Queue of freezer enemies
-	Queue<Enemy*> Killed;					//Queue of killed enemies
+
 
 
 public:

@@ -94,7 +94,24 @@ bool Battle::LoadingFunction()
 
 void Battle::SimpleSimulator()
 {
+	LoadingFunction();
+	AddAllListsToDrawingList();
+	pGUI->UpdateInterface(CurrentTimeStep);
+	ActivateEnemies();
+	///////freeze two active
+	FrostedCount + 2;
+	ActiveFighterCount - 2;
 
+	//////2frtosted to active
+	ActiveFighterCount, FrostedCount, KilledCount;
+	ActiveFighterCount + 2;
+	FrostedCount - 2;
+
+	//////kill one active one frosted
+	KilledCount + 2;
+	FrostedCount - 1;
+	ActiveFighterCount - 1;
+	////draw
 }
 
 
@@ -131,9 +148,9 @@ void Battle::AddAllListsToDrawingList()
 	for (int i = 0; i < ActiveFreezerCount; i++)
 		pGUI->AddToDrawingList(ActiveFreezerList[i]);
 
-	Enemy* const* KilledList = Killed.toArray(KilledCount);
-	for (int i = 0; i < KilledCount; i++)
-		pGUI->AddToDrawingList(KilledList[i]);
+	//Enemy* const* KilledList = Killed.toArray(KilledCount);
+	//for (int i = 0; i < KilledCount; i++)
+	//	pGUI->AddToDrawingList(KilledList[i]);
 
 }
 
