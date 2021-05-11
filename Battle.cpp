@@ -122,10 +122,32 @@ void Battle::castleAttack()
 
 
 void Battle::enemiesAttack()
+
+			File >> h;
+			AllEnemies[i].SetH(h);						//Setting enemy health
+
+			File >> h;
+			AllEnemies[i].SetPOW(h);					//Setting enemy power
+
+			File >> h;
+			AllEnemies[i].SetRLD(h);					//Setting enemy reload time
+
+			File >> h;
+			AllEnemies[i].SetSPD(h);					//Setting enemy speed
+		}
+	}
+}
+
+void Battle::castleAttack()
 {
 
 }
 
+
+void Battle::enemiesAttack()
+{
+
+}
 
 //Add enemy lists (inactive, active,.....) to drawing list to be displayed on user interface
 void Battle::AddAllListsToDrawingList()
@@ -147,11 +169,9 @@ void Battle::AddAllListsToDrawingList()
 	Enemy* const* ActiveFreezerList = ActiveFreezer.toArray(ActiveFreezerCount);
 	for (int i = 0; i < ActiveFreezerCount; i++)
 		pGUI->AddToDrawingList(ActiveFreezerList[i]);
-
-	//Enemy* const* KilledList = Killed.toArray(KilledCount);
-	//for (int i = 0; i < KilledCount; i++)
-	//	pGUI->AddToDrawingList(KilledList[i]);
-
+	Enemy* const* KilledList = Killed.toArray(KilledCount);
+	for (int i = 0; i < KilledCount; i++)
+		pGUI->AddToDrawingList(KilledList[i]);
 }
 
 //check the inactive list and activate all enemies that has arrived

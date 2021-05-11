@@ -82,3 +82,12 @@ int Enemy::GetArrvTime() const
 {
 	return ArrvTime;
 }
+
+bool Enemy::IsFrosted()
+{
+	return Frosted;
+}
+void Enemy::SetFrosted(bool F)
+{
+	Frosted = F;
+}

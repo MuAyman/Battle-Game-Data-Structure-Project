@@ -13,8 +13,7 @@ protected:
 	int ID;         //Each enemy has a unique ID (sequence number)
 	int ArrvTime;	//arrival time (time it starts to join battle)
 	int Distance;
-
-
+	bool Frosted; //Whenever an enemy gets frosted its property “IsFrosted” is turned into Ture
 	ENMY_STATUS status;	    //status of the enemy (inactive, inactive, frosted, killed)
 	//int Distance;	//Horizontal distance between enemy & the tower of its region
 	                //Always positive (ranges from 2 to 60)
@@ -35,8 +34,8 @@ public:
 	void SetPOW(double power);
 	void SetRLD(double reload);
 	void SetSPD(double speed);
-
-
+	bool IsFrosted();
+	void SetFrosted(bool F);
 	void DecrementDist();
 
 	void SetDistance(int );
