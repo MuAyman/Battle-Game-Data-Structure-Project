@@ -55,7 +55,14 @@ public:
 		return true;
 	}  // end peek
 
+	int GetCount() const
+	{
+		return (top+1);
+	}
+
+	T* GetArray() const
+	{
+		return items;
+	}
+
 }; // end ArrayStack
-
-
-

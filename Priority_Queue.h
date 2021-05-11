@@ -4,28 +4,31 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
-
 using namespace std;
 
+template <class T>
 struct n // node declaration
 {
-    int priority;
-    int info;
-    struct n* next;
+    T priority;
+    T info;
+    struct n * next;
 };
+
+template <class T>
 class Priority_Queue
 {
 private:
-    n* f;
-
+    n<T>* f;
+    int count;
 public:
     Priority_Queue()
     {
-
         f = NULL;
     }
-    void insert(int i, int p)
+    void insert(T i, T p)
     {
+        count++;
+
         n* t, * q;
         t = new n;
         t->info = i;
@@ -44,8 +47,11 @@ public:
             q->next = t;
         }
     }
+
     void delet()
     {
+        count--;
+
         n* t;
         if (f == NULL) //if queue is null
             cout << "Queue Underflow\n";
@@ -57,6 +63,8 @@ public:
             free(t);
         }
     }
+
+
     void show() //print queue {
     {
         n* ptr;
@@ -74,5 +82,43 @@ public:
             }
         }
     }
-};
 
+    int GetCount() const
+    {
+        return count;
+    }
+
+    const T* toArray(int& count)
+    {
+
+        //IMPORTANT:
+        //toArray function to be used ONLY when drawing the queue items
+
+        count = 0;
+
+        if (!f)
+            return nullptr;
+        //counting the no. of items in the Queue
+        n* p;
+        p = f;
+        while (p)
+        {
+            count++;
+            p = p->getNext();
+        }
+
+
+        T* Arr = new T[count];
+        p = f;
+        for (int i = 0; i < count; i++)
+        {
+            Arr[i] = p->getItem();
+            p = p->getNext();
+        }
+        return Arr;
+        //IMPORTANT:
+        //toArray function to be used ONLY when drawing the queue items
+
+    }
+
+};

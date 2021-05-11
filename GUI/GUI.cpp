@@ -86,7 +86,7 @@ void GUI::DrawString(const int iX, const int iY, const string Text)
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::ClearStatusBar() const
 {
-	pWind->SetPen(StatusBarClr, 3);
+ 	pWind->SetPen(StatusBarClr, 3);
 	pWind->SetBrush(StatusBarClr);
 	pWind->DrawRectangle(0, WindHeight - StatusBarHeight , WindWidth, WindHeight);	
 

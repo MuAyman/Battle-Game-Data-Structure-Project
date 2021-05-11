@@ -21,6 +21,35 @@ void Enemy::SetStatus(ENMY_STATUS s)
 	status = s;
 }
 
+void Enemy::SetID(double id)
+{
+	ID = id;
+}
+
+void Enemy::SetAT(double arrival)
+{
+	ArrvTime = arrival;
+}
+
+void Enemy::SetH(double health)
+{
+	Health = health;
+}
+
+void Enemy::SetPOW(double power)
+{
+	Power = power;
+}
+
+void Enemy::SetRLD(double reload)
+{
+	ReloadSpeed = reload;
+}
+
+void Enemy::SetSPD(double speed)
+{
+	Speed = speed;
+}
 
 ENMY_STATUS Enemy::GetStatus() const
 {
@@ -52,4 +81,13 @@ int Enemy::GetDistance() const
 int Enemy::GetArrvTime() const
 {
 	return ArrvTime;
+}
+
+bool Enemy::IsFrosted()
+{
+	return Frosted;
+}
+void Enemy::SetFrosted(bool F)
+{
+	Frosted = F;
 }
