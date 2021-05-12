@@ -4,6 +4,7 @@ class healer:public Enemy
 {
 public:
 	void incrementDist();
+    void Move();
 	
 };
 

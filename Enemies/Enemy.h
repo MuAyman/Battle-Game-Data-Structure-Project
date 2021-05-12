@@ -48,7 +48,7 @@ public:
 
 	// Virtual Functions: ----------------
 
-	//virtual void Move() = 0;	//All enemies can move
+	virtual void Move() = 0;	//All enemies can move
 	//virtual void Act() = 0;	    //Acting means fighting or healing
 
 	//
