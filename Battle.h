@@ -21,7 +21,18 @@ private:
 											// to point to the current active enemies 
 											// then pass the pointers list to the GUI function
 
+
 	Queue<Enemy*> Q_Inactive;		//Queue of inactive enemies
+
+
+	int InactiveCount, ActiveCount,Activehealers, Activefighters, Activefreezers, FrostedCount, KilledCount;
+	Queue<Enemy*> Q_Active;			//Queue of active enemies
+	Queue<Enemy*> Q_Inactive;		//Queue of inactive enemies
+	Queue<Enemy*> Q_Frosted;		//Queue of frosted enemies
+	Queue<Enemy*> Q_Killed;			//Queue of killed enemies
+	Queue<Enemy*>Q_Activehealer;
+	Queue<Enemy*>Q_Activefighter;
+	Queue<Enemy*>Q_Activefreezer;
 
 
 	/// ==> 
