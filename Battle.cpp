@@ -68,47 +68,96 @@ bool Battle::LoadingFunction()
 
 		for (int i = 1; i < EnemyCount; i++)
 		{
-			File >> h;
-			AllEnemies[i].SetID(h);				//Setting enemy id
+			//File >> h;
+			//AllEnemies[i].SetID(h);				//Setting enemy id
 
-			File >> h;
-			AllEnemies[i].SetStatus((ENMY_STATUS)h);	//Setting enemy type
+			//File >> h;
+			//AllEnemies[i].SetStatus((ENMY_STATUS)h);	//Setting enemy type
 
-			File >> h;
-			AllEnemies[i].SetAT(h);						//Setting enemy arrival time
+			//File >> h;
+			//AllEnemies[i].SetAT(h);						//Setting enemy arrival time
 
-			File >> h;
-			AllEnemies[i].SetH(h);						//Setting enemy health
+			//File >> h;
+			//AllEnemies[i].SetH(h);						//Setting enemy health
 
-			File >> h;
-			AllEnemies[i].SetPOW(h);					//Setting enemy power
+			//File >> h;
+			//AllEnemies[i].SetPOW(h);					//Setting enemy power
 
-			File >> h;
-			AllEnemies[i].SetRLD(h);					//Setting enemy reload time
+			//File >> h;
+			//AllEnemies[i].SetRLD(h);					//Setting enemy reload time
 
-			File >> h;
-			AllEnemies[i].SetSPD(h);					//Setting enemy speed
+			//File >> h;
+			//AllEnemies[i].SetSPD(h);					//Setting enemy speed
 		}
 	}
 }
 
 void Battle::SimpleSimulator()
 {
+	LoadingFunction();
+	AddAllListsToDrawingList();
+	pGUI->UpdateInterface(CurrentTimeStep);
+	ActivateEnemies();
+	///////freeze two active
+	FrostedCount + 2;
+	ActiveFighterCount - 2;
 
+	//////2frtosted to active
+	ActiveFighterCount, FrostedCount, KilledCount;
+	ActiveFighterCount + 2;
+	FrostedCount - 2;
+
+	//////kill one active one frosted
+	KilledCount + 2;
+	FrostedCount - 1;
+	ActiveFighterCount - 1;
+	////draw
 }
 
 
 void Battle::castleAttack()
 {
-
+	if(!BCastle.GetFrosted())
+	{
+		Enemy* e;
+		while (ActiveFighter.peek( e)&& BCastle.GetN() !=0)
+		{
+			int n = BCastle.GetN();
+			BCastle.SetN(n--);
+			e->effect_onSpeed();
+			if ((e->GetType() == 0)|| (e->GetType() == 2))
+			{
+				e->SetDCE(BCastle.GetCaste_Power() / (e->GetDistance()));
+			}
+			else if (e->GetType() == 1)
+			{
+				e->SetDCE(0.5*BCastle.GetCaste_Power() / (e->GetDistance()));
+			}
+		}
+	}
 }
+
 
 
 void Battle::enemiesAttack()
 {
-
+	if (BfEnemy.GetFrosted()) {}
 }
 
+void Battle::enemiesAttack() {};
+
+//{File >> h;
+//			AllEnemies[i].SetH(h);						//Setting enemy health
+//
+//			File >> h;
+//			AllEnemies[i].SetPOW(h);					//Setting enemy power
+//
+//			File >> h;
+//			AllEnemies[i].SetRLD(h);					//Setting enemy reload time
+//
+//			File >> h;
+//			AllEnemies[i].SetSPD(h);					//Setting enemy speed
+//		}
 
 //Add enemy lists (inactive, active,.....) to drawing list to be displayed on user interface
 void Battle::AddAllListsToDrawingList()
@@ -130,11 +179,9 @@ void Battle::AddAllListsToDrawingList()
 	Enemy* const* ActiveFreezerList = ActiveFreezer.toArray(ActiveFreezerCount);
 	for (int i = 0; i < ActiveFreezerCount; i++)
 		pGUI->AddToDrawingList(ActiveFreezerList[i]);
-
-	Enemy* const* KilledList = Killed.toArray(KilledCount);
-	for (int i = 0; i < KilledCount; i++)
-		pGUI->AddToDrawingList(KilledList[i]);
-
+	//Enemy* const* KilledList = Killed.toArray(KilledCount);
+	//for (int i = 0; i < KilledCount; i++)
+		//pGUI->AddToDrawingList(KilledList[i]);
 }
 
 //check the inactive list and activate all enemies that has arrived

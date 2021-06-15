@@ -55,7 +55,14 @@ ENMY_STATUS Enemy::GetStatus() const
 {
 	return status;
 }
-
+ENMY_TYPE Enemy::GetType() const
+{
+	return type;
+}
+void Enemy::SetType(ENMY_TYPE t)
+{
+	type = t;
+}
 
 void Enemy::DecrementDist()
 {
@@ -90,4 +97,57 @@ bool Enemy::IsFrosted()
 void Enemy::SetFrosted(bool F)
 {
 	Frosted = F;
+}
+
+bool  Enemy::GetFrosted() const
+{
+	return Frosted;
+}
+double  Enemy::GetChanged_Health() const
+{
+	return Changed_Health;
+}
+void Enemy::effect_onSpeed()  // call on move!!
+{
+	if (Changed_Health < 0.5 * Health) { Speed = 0.5 * Speed; };
+}
+void  Enemy::during_reloadperoid()
+{
+	if (reload) { Move(); }
+	else { Move(); Act(); };
+}
+void  Enemy::Freeze()
+{
+
+}
+void  Enemy::Fire()
+{
+
+}
+void  Enemy::ifFreezing()
+{
+	if (! Frosted) { Freeze(); Fire(); }
+	else { Fire(); }
+	
+}
+void Enemy::SETt_Frosted(int t)
+{
+	t_Frosted = t;
+}
+int Enemy::GETt_Frosted()
+{
+	return t_Frosted;
+}
+int Enemy::getPariority()
+{
+	return 1 / (Health * Power * Distance * LT);
+}
+
+void Enemy::SetDCE(double dce)
+{
+	DCE = dce;
+}
+double Enemy::GetDCE()
+{
+	return DCE;
 }

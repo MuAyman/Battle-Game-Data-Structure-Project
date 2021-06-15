@@ -11,7 +11,7 @@ struct n // node declaration
 {
     T priority;
     T info;
-    struct n * next;
+    n<T> * next;
 };
 
 template <class T>
@@ -63,6 +63,15 @@ public:
             free(t);
         }
     }
+    bool peek(T& frntEntry) const
+    {
+        if (isEmpty())
+            return false;
+
+        frntEntry = f->info;
+        return true;
+
+    }
 
 
     void show() //print queue {
@@ -99,12 +108,11 @@ public:
         if (!f)
             return nullptr;
         //counting the no. of items in the Queue
-        n* p;
-        p = f;
+        n<T>* p = f;
         while (p)
         {
             count++;
-            p = p->getNext();
+            p = p->next;
         }
 
 
@@ -112,8 +120,8 @@ public:
         p = f;
         for (int i = 0; i < count; i++)
         {
-            Arr[i] = p->getItem();
-            p = p->getNext();
+            Arr[i] = p->info;
+            p = p->next;
         }
         return Arr;
         //IMPORTANT:
