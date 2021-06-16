@@ -10,5 +10,7 @@ public:
 
     void Move();
 
-};
 
+	void ifHealing();
+	void Heal();
+};
