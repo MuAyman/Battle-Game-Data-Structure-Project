@@ -35,9 +35,16 @@ enum PROG_MODE	//mode of the program interface
 	MODE_INTR,	//interactive mode
 	MODE_STEP,	//Step-by-step mode
 	MODE_SLNT,	//Silent mode
-	MODE_DEMO,	//Demo mode (for introductory phase only, should be removed in phases 1&2)
 	MODE_CNT	//number of possible modes
 };
 
+
+enum GAME_STATUS	//how the battle endS (win, loss, or withdraw)
+{
+	WIN,			// Castle wins
+	LOSS,			// Castle losses
+	DRAWN,			// game drawn
+	GAME_STATUS_CNT	// number of possible ends
+};
 
 

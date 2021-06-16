@@ -1,9 +1,0 @@
-﻿cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
-  Battle.cpp
-D:\ZC\Spring 21\Data Structures\Project\CIE205Project_Code_S2021\Battle.cpp(9,1): error C2512: 'ArrayStack<Enemy *>': no appropriate default constructor available
-D:\ZC\Spring 21\Data Structures\Project\CIE205Project_Code_S2021\Battle.h(24,2): message : see declaration of 'ArrayStack<Enemy *>'
-D:\ZC\Spring 21\Data Structures\Project\CIE205Project_Code_S2021\Battle.cpp(67,16): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
-  Compiling...
-  Demo_Main.cpp
-  Generating Code...
