@@ -1,8 +1,13 @@
 #pragma once
 #include "Enemies/Enemy.h"
-class freezer:public Enemy
+class Freezer :
+    public Enemy
 {
+
 public:
-	void Move();
+    Freezer(int id, int arr, double h, double p, double rel, double spd);
+
+    void Move();
+
 };
 

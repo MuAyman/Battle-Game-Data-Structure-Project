@@ -1,7 +1,17 @@
-#include "freezer.h"
-void freezer::Move() 
+#include "Freezer.h"
+
+
+
+Freezer::Freezer(int id, int arr, double h, double p, double rel, double spd)
+    : Enemy(id, 2, arr, h, p, rel, spd)
 {
-	for (int i = 0; i = speed - 1; i++)
+
+};
+
+
+void Freezer::Move()
+{
+	for (int i = 0; i = Speed - 1; i++)
 	{
 		DecrementDist();
 	}

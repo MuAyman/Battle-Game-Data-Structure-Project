@@ -1,10 +1,14 @@
 #pragma once
 #include "Enemies/Enemy.h"
-class healer:public Enemy
+class Healer :
+    public Enemy
 {
+
+
 public:
-	void incrementDist();
+    Healer(int id, int arr, double h, double p, double rel, double spd);
+
     void Move();
-	
+
 };
 

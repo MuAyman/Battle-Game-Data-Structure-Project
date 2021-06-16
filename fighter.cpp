@@ -1,12 +1,16 @@
-#include "fighter.h"
-void fighter::Move()
+#include "Fighter.h"
+
+
+Fighter::Fighter(int id, int arr, double h, double p, double rel, double spd)
+    : Enemy(id, 0, arr, h, p, rel, spd)
 {
-	for (int i = 0; i = speed - 1; i++)
+};
+
+
+void Fighter::Move()
+{
+	for (int i = 0; i = Speed - 1; i++)
 	{
 		DecrementDist();
 	}
-}
-int fighter::calculateDFS(int power, int Distance) 
-{
-
 }
