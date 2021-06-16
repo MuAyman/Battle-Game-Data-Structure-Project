@@ -19,14 +19,24 @@ protected:
 	                //Always positive (ranges from 2 to 60)
 
 	double Health, Power, ReloadSpeed, Speed;
-	
 
+	int t_frozen;		// the time needed for the frozen to melt and back active again
+	int t_killed;		// the time when the enemy got killed
+	int t_firstShot;	// the first shot time of each enemy
 public:
-	Enemy(int id=0, int arrTime=0, int d = MaxDistance);
+	Enemy(int id, int typ, int arr, double h, double p, double rel, double spd);
 	virtual ~Enemy();
 
-	int Enemy::GetID() const;
+		// getters
+	int GetID() const;
 	ENMY_STATUS GetStatus() const;
+	int GetDistance() const;
+	int GettFrozen() const;
+	int GetArrvTime() const;
+	int GettKilled() const;
+	int GettFD() const;
+
+		// setters
 	void SetStatus(ENMY_STATUS s);
 	void SetID(double id);
 	void SetAT(double arrival);
@@ -34,19 +44,18 @@ public:
 	void SetPOW(double power);
 	void SetRLD(double reload);
 	void SetSPD(double speed);
+	void SettFrozen(int t);
+	void SetDistance(int d);
+	void SettKilled(int t);
+	void SettFD(int t);
 
 
-	void DecrementDist();
-
-	void SetDistance(int );
-	int GetDistance() const;
-
-	int GetArrvTime() const;
+	void DecrementDist();	// decremant the distance of each enemy
 
 
 	// Virtual Functions: ----------------
 
-	//virtual void Move() = 0;	//All enemies can move
+	virtual void Move() = 0;	//All enemies can move
 	//virtual void Act() = 0;	//Acting means fighting or healing
 
 	//

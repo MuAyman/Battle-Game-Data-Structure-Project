@@ -1,6 +1,12 @@
 #include "GUI.h"
 #include <time.h>
 #include <cstdlib>
+#include "../Enemies/Enemy.h"
+#include "../Fighter.h"
+#include "../Freezer.h"
+#include "../Healer.h"
+using namespace std;
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 GUI::GUI()
@@ -260,17 +266,28 @@ void GUI::UpdateInterface(int CurrentTimeStep)
 	AddOrderForDrawing: Adds a new item related to the passed Enemy to the drawing list
 */
 
-void GUI::AddToDrawingList(const Enemy* pE)
+void GUI::AddToDrawingList(Enemy* pE)
 {
 	DrawingItem *pDitem=new DrawingItem;
 	pDitem->ID = pE->GetID();
 	pDitem->distance = pE->GetDistance();
 	pDitem->region= (GUI_REGION) (pE->GetStatus());	//map status to drawing region	
 
-	// IMPORTANT [TO DO]
+	// IMPORTANT [TO DO]	//DONE
 	// enemy type has been generated randomly here because enemy classes are not written yet
 	// in next phases, to know enemy type, you should apply dynamic_cast to pE pointer
-	int eType = pDitem->ID%ENMY_TYPE_CNT;	
+
+	Fighter* ptrF = dynamic_cast<Fighter*>(pE);
+	Healer* ptrH = dynamic_cast<Healer*>(pE);
+	Freezer* ptrFr = dynamic_cast<Freezer*>(pE);
+	int eType;
+	if (ptrF)
+		eType = ptrF->GetStatus();
+	else if (ptrH)
+		eType = ptrH->GetStatus();
+	else if (ptrFr)
+		eType = ptrFr->GetStatus();
+
 	pDitem->clr = DrawingColors[eType];
 	/////////////
 	/////////////

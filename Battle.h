@@ -13,18 +13,17 @@ class Battle
 private:
 	GUI* pGUI;
 	Castle BCastle;
-	int EnemyCount, CurrentTimeStep;	//the actual number of enemies in the game
-	int InactiveCount, ActiveFighterCount, ActiveHealerCount,
-		ActiveFreezerCount, FrostedCount, KilledCount;	//no. of enemies (Active, Frosted, killed so far)
-
-	Enemy AllEnemies[MaxEnemyCount];		// This Array of All Enemies (objects)
-								  			
-	Queue<Enemy*> Inactive;					//Queue of inactive enemies
-	Priority_Queue<Enemy*> ActiveFighter;	//Priority Queue of active fighters
-	ArrayStack<Enemy*> ActiveHlealer;		//Stack of active Healer
-	Queue<Enemy*> ActiveFreezer;			//Queue of freezer enemies
+	int EnemyCount, CurrentTimeStep=0;	//the total number of enemies in the game
+	int InactiveCount=0, ActiveFighterCount=0, ActiveHealerCount=0,
+		ActiveFreezerCount=0, FrostedCount=0, KilledCount=0;	//no. of enemies (Active, Frosted, killed so far)
 
 
+	Queue<Enemy*> Inactive;						//Queue of inactive enemies
+	Priority_Queue<Enemy*> ActiveFighter;		//Priority Queue of active fighters
+	Priority_Queue<Enemy*> ActiveHlealer;		//Priority Stack of active Healer
+	Priority_Queue<Enemy*> ActiveFreezer;		//Priority Queue of freezer enemies
+	Queue<Enemy*> Killed;						//Queue of Killed enemies
+	Priority_Queue<Enemy*> Frosted;				//Priority Queue of frosted enemies
 
 public:
 	
@@ -36,8 +35,16 @@ public:
 
 	void castleAttack();
 	void enemiesAttack();
+	void updateEnemies();		// updates enemies status and distance
+	GAME_STATUS BattleStatus();			// returns how the battle ended (win, loss, or withdraw)
+	bool LoadingFunction();		// loads all enemies info from the input file
+	void outputing();
 
-	bool LoadingFunction();
+
+	void InteractiveMode();
+	void StepByStepMode();
+	void SilentMode();
+	
 	void SimpleSimulator();
 
 };
