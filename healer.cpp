@@ -1,3 +1,4 @@
+
 #include "Healer.h"
 
 
@@ -14,4 +15,13 @@ void Healer::Move()
 	{
 		DecrementDist();
 	}
+}
+
+void healer::Heal()
+{
+
+}
+void healer::ifHealing()
+{
+    if ((!(Frosted || Killed))&& Distance <=2) { Heal(); }
 }

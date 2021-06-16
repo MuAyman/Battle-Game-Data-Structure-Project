@@ -34,6 +34,7 @@ public:
 	int GetIce() const;
 	void SetFire(int n_Fire);
 	int GetFire() const;
-
+	void Attack();
+	void ifAttack();
 
 };

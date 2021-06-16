@@ -6,6 +6,7 @@
 #include "Priority_Queue.h"
 #include "ArrayStack.h"
 #include "GUI\GUI.h"
+#include "fighter.h"
 
 // it is the controller of the project
 class Battle
@@ -16,6 +17,14 @@ private:
 	int EnemyCount, CurrentTimeStep=0;	//the total number of enemies in the game
 	int InactiveCount=0, ActiveFighterCount=0, ActiveHealerCount=0,
 		ActiveFreezerCount=0, FrostedCount=0, KilledCount=0;	//no. of enemies (Active, Frosted, killed so far)
+
+///////////////////////////////////////////////	Riham ?????????????????
+Castle* cas;
+fighter BfEnemy;
+double DCE;                            //Damage to an enemy by a castle bullet (not applicable for ice throws)
+
+///////////////////////////////////////////
+
 
 	Queue<Enemy*> Inactive;						//Queue of inactive enemies
 	Priority_Queue<Enemy*> ActiveFighter;		//Priority Queue of active fighters

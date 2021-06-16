@@ -91,3 +91,11 @@ int Castle::GetFire() const
 {
 	return Fire;
 }
+void Castle::Attack()
+{
+
+}
+void Castle::ifAttack()
+{
+	if (!Frosted) { Attack(); }     
+}

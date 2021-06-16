@@ -7,6 +7,5 @@ class Fighter :
 public:
     Fighter(int id, int arr, double h, double p, double rel, double spd);
 	void Move();
-	
-};
 
+};
