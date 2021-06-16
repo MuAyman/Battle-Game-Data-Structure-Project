@@ -17,11 +17,16 @@ void Healer::Move()
 	}
 }
 
-void healer::Heal()
+void Healer::Act()
+{
+}
+
+
+void Healer::Heal()
 {
 
 }
-void healer::ifHealing()
+void Healer::ifHealing()
 {
-    if ((!(Frosted || Killed))&& Distance <=2) { Heal(); }
+	//  if ((!(Frosted || Killed))&& Distance <=2) { Heal(); }
 }

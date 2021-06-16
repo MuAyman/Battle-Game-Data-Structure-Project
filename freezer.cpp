@@ -16,3 +16,6 @@ void Freezer::Move()
 		DecrementDist();
 	}
 }
+
+void Freezer::Act()
+{}

@@ -291,8 +291,8 @@ void Battle::outputing()
 	{
 		Killed.dequeue(e);
 		KilledCount--;
-		FD = e->GettFD() + e->GetArrvTime();
-		KD = e->GettKilled() + e->GettFD();
+		FD = e->GettFS() + e->GetArrvTime();
+		KD = e->GettKilled() + e->GettFS();
 		LT = FD + KD;
 		outputfile << e->GettKilled() << " " << e->GetID() << "     "
 			<< FD << " " << KD << " " << LT << "\n";
@@ -307,7 +307,7 @@ void Battle::outputing()
 		{
 			ActiveFighter.dequeue(e);
 			ActiveFighterCount--;
-			FD = e->GettFD() + e->GetArrvTime();
+			FD = e->GettFS() + e->GetArrvTime();
 			KD = 0;		// since he's not dead asln
 			LT = CurrentTimeStep - e->GetArrvTime();	// since he's still alive
 			outputfile << 0 << " " << e->GetID() << "     "		// KTS is zero since he's still alive
@@ -321,7 +321,7 @@ void Battle::outputing()
 		{
 			ActiveFreezer.dequeue(e);
 			ActiveFreezerCount--;
-			FD = e->GettFD() + e->GetArrvTime();
+			FD = e->GettFS() + e->GetArrvTime();
 			KD = 0;		// since he's not dead asln
 			LT = CurrentTimeStep - e->GetArrvTime();	// since he's still alive
 			outputfile << 0 << " " << e->GetID() << "     "		// KTS is zero since he's still alive
@@ -335,7 +335,7 @@ void Battle::outputing()
 		{
 			ActiveHlealer.dequeue(e);
 			ActiveHealerCount--;
-			FD = e->GettFD() + e->GetArrvTime();
+			FD = e->GettFS() + e->GetArrvTime();
 			KD = 0;		// since he's not dead asln
 			LT = CurrentTimeStep - e->GetArrvTime();	// since he's still alive
 			outputfile << 0 << " " << e->GetID() << "     "		// KTS is zero since he's still alive
@@ -349,7 +349,7 @@ void Battle::outputing()
 		{
 			Frosted.dequeue(e);
 			FrostedCount--;
-			FD = e->GettFD() + e->GetArrvTime();
+			FD = e->GettFS() + e->GetArrvTime();
 			KD = 0;		// since he's not dead asln
 			LT = CurrentTimeStep - e->GetArrvTime();	// since he's still alive
 			outputfile << 0 << " " << e->GetID() << "     "		// KTS is zero since he's still alive
@@ -418,44 +418,21 @@ void Battle::SilentMode()
 
 void Battle::castleAttack()
 {
-
-}
-
-
-void Battle::enemiesAttack()
-
-			//File >> h;
-			//AllEnemies[i].SetH(h);						//Setting enemy health
-
-			//File >> h;
-			//AllEnemies[i].SetPOW(h);					//Setting enemy power
-
-			//File >> h;
-			//AllEnemies[i].SetRLD(h);					//Setting enemy reload time
-
-			//File >> h;
-			//AllEnemies[i].SetSPD(h);					//Setting enemy speed
-		}
-	}
-}
-
-void Battle::castleAttack()
-{
 	if(!BCastle.GetFrosted())
 	{
 		Enemy* e;
-		while (ActiveFighter.peek( e)&& BCastle.GetN() !=0)
+		while (ActiveFighter.dequeue(e)&& BCastle.GetN() !=0)
 		{
-			int n = BCastle.GetN();
-			BCastle.SetN(n--);
+			ActiveFighterCount--;
+			BCastle.SetN(BCastle.GetN() - 1);
 			e->effect_onSpeed();
 			if ((e->GetType() == 0)|| (e->GetType() == 2))
 			{
-				e->SetDCE(BCastle.GetCaste_Power() / (e->GetDistance()));
+				e->SetDCE(BCastle.GetPower() / (e->GetDistance()));
 			}
 			else if (e->GetType() == 1)
 			{
-				e->SetDCE(0.5*BCastle.GetCaste_Power() / (e->GetDistance()));
+				e->SetDCE(0.5*BCastle.GetPower() / (e->GetDistance()));
 			}
 		}
 	}
@@ -463,8 +440,50 @@ void Battle::castleAttack()
 
 
 void Battle::enemiesAttack()
-{
+{/*
 	if (BfEnemy.GetFrosted()) {}
+
+	Enemy* e;
+	if (!e->Getreload_period())
+	{
+		if (e->GetStatus() == FIGHTER)
+		{
+			int k;
+			double DFC = (k / ((e->GetDistance()) * (e->Getpower())));
+			if (e->GetHealth() < (0.5 * (e->GetInitialHealth())))
+			{
+				k = 0.5;
+			}
+			else
+
+			{
+				k = 1;
+			}
+			BCastle.SetTotal_damage(BCastle.GetTotal_damage += DFC);
+			e->setfirstshot(CurrentTimeStep);
+		}
+		else if (e->GetTYPE() == FREEZER)
+		{
+			//double amountofice;
+			BCastle.setamountofice(BCastle.Getamountofice() + (e->Getpower()));
+			if (BCastle.Getamountofice() == 20)
+				BCastle.SetFrosted(1);
+		}
+	}*/
+}
+
+void Battle::heal()
+{
+	Enemy* e;
+	Enemy* d;
+	if (e->GetType() == HEALER && !e->GetFrosted() && !d->GetFrosted() && (e->GetType() == FIGHTER || e->GetType() == FREEZER))
+	{
+		int distancebetweenenemies = (e->GetDistance()) - (d->GetDistance());
+		if (distancebetweenenemies <= 2)
+		{
+			d->SetH(d->GetHealth() + (20 / (100 * distancebetweenenemies)) * (e->GetHealth()));
+		}
+	}
 }
 
 

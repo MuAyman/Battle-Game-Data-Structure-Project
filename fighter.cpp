@@ -14,3 +14,8 @@ void Fighter::Move()
 		DecrementDist();
 	}
 }
+
+void Fighter::Act()
+{
+
+}

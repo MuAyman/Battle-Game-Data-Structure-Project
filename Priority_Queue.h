@@ -85,15 +85,6 @@ public:
             free(t);
         }
     }
-    bool peek(T& frntEntry) const
-    {
-        if (isEmpty())
-            return false;
-
-        frntEntry = f->info;
-        return true;
-
-    }
 
     bool isEmpty() const
     {

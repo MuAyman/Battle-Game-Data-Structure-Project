@@ -20,7 +20,7 @@ private:
 
 ///////////////////////////////////////////////	Riham ?????????????????
 Castle* cas;
-fighter BfEnemy;
+//Fighter BfEnemy;
 double DCE;                            //Damage to an enemy by a castle bullet (not applicable for ice throws)
 
 ///////////////////////////////////////////
@@ -43,16 +43,18 @@ public:
 
 	void castleAttack();
 	void enemiesAttack();
+
 	void updateEnemies();		// updates enemies status and distance
 	GAME_STATUS BattleStatus();			// returns how the battle ended (win, loss, or withdraw)
 	bool LoadingFunction();		// loads all enemies info from the input file
 	void outputing();
 
+	//Hajer ????
+	void heal();		//?????????
+
 
 	void InteractiveMode();
 	void StepByStepMode();
 	void SilentMode();
-
-	void SimpleSimulator();
 
 };

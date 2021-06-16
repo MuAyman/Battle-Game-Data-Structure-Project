@@ -85,16 +85,38 @@ void Enemy::SettKilled(int t)
 	t_killed = t;
 }
 
-int Enemy::GettFD() const
+int Enemy::GettFS() const
 {
 	return t_firstShot;
 }
-void Enemy::SettFD(int t)
+void Enemy::SettFS(int t)
 {
 	t_firstShot = t;
 }
 
+ENMY_TYPE Enemy::GetType() const
+{
+	return type;
+}
 
+double Enemy::GetHealth() const
+{
+	return Health;
+}
+
+void Enemy::SetInitialHealth(double H)
+{
+	InitialHealth = H;
+}
+double Enemy::GetInitialHealth() const
+{
+	return 	InitialHealth;
+}
+
+void Enemy::SetType(ENMY_TYPE t)
+{
+	type = t;
+}
 
 void Enemy::DecrementDist()
 {
@@ -122,10 +144,7 @@ int Enemy::GetArrvTime() const
 	return ArrvTime;
 }
 
-bool Enemy::IsFrosted()
-{
-	return Frosted;
-}
+
 void Enemy::SetFrosted(bool F)
 {
 	Frosted = F;
@@ -135,13 +154,11 @@ bool  Enemy::GetFrosted() const
 {
 	return Frosted;
 }
-double  Enemy::GetChanged_Health() const
-{
-	return Changed_Health;
-}
+
+
 void Enemy::effect_onSpeed()  // call on move!!
 {
-	if (Changed_Health < 0.5 * Health) { Speed = 0.5 * Speed; };
+	if (Health < 0.5 * InitialHealth) { Speed = 0.5 * Speed; };
 }
 void  Enemy::during_reloadperoid()
 {
@@ -164,12 +181,9 @@ void  Enemy::ifFreezing()
 }
 void Enemy::SETt_Frosted(int t)
 {
-	t_Frosted = t;
+	t_frozen = t;
 }
-int Enemy::GETt_Frosted()
-{
-	return t_Frosted;
-}
+
 int Enemy::getPariority()
 {
 	return 1 / (Health * Power * Distance * LT);
@@ -183,3 +197,10 @@ double Enemy::GetDCE()
 {
 	return DCE;
 }
+
+int Enemy::freezingTime(int CastlePower, int CastleHealth)
+{
+	return	(CastlePower * CastleHealth) / (Health * Power * Distance);
+}
+
+
