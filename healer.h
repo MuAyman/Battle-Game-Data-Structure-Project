@@ -11,7 +11,7 @@ public:
 
     void Move();
 	void Act(Enemy* h, Enemy* d);
-
+	void Act();
 	void ifHealing();
 	//void Heal();
 };

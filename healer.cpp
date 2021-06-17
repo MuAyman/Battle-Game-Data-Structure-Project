@@ -15,7 +15,7 @@ Healer::Healer(int id, int arr, double h, double p, double rel, double spd)
 
 void Healer::Move()
 {
-
+	
 	for (int i = 0; i = Speed - 1; i++)
 	{
 			DecrementDist();
@@ -35,6 +35,17 @@ void Healer::Act(Enemy* h, Enemy* d)
 			d->SetH(d->GetHealth() + (20 / (100 * distancebetweenenemies)) * (h->GetHealth()));
 		}
 	}
+}
+
+
+
+
+
+
+
+
+void Healer::Act()
+{
 }
 
 

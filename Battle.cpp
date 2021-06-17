@@ -504,6 +504,7 @@ int Battle::getcurrenttimestep() const
 void Battle::heal()
 {
 	Enemy* e;
+	Enemy* d;
 	Queue <Enemy*> tempQ;
 	int countTempQ = 0, tempcounter = 0;
 
@@ -515,13 +516,13 @@ void Battle::heal()
 
 		Healer* ptrH = dynamic_cast<Healer*>(e);
 
-		ptrH->Act(e,ptrH);	//healing
+		ptrH->Act(ptrH,d);	//healing
 
 		tempQ.enqueue(ptrH);
 		countTempQ++;
 	}
 	// re inserting the enemies again in the ActiveHlealer queue after
-	// updating the the distance
+	
 	for (int i = 0; i < countTempQ; i++)
 	{
 		tempQ.dequeue(e);
