@@ -9,7 +9,7 @@ using namespace std;
 template <class T>
 struct n // node declaration
 {
-    T priority;
+    int priority;
     T info;
     n<T> * next;
 };
@@ -23,14 +23,15 @@ private:
 public:
     Priority_Queue()
     {
-        f = NULL;
+        f = nullptr;
+        count = 0;
     }
-    void insert(T i, T p)
+    void insert(T i, int p)
     {
         count++;
 
-        n* t, * q;
-        t = new n;
+        n<T>* t, * q;
+        t = new n<T>;
         t->info = i;
         t->priority = p;
         if (f == NULL || p < f->priority)
@@ -48,35 +49,70 @@ public:
         }
     }
 
+    void insert_Stack(T i, int p)
+    {
+        count++;
+
+        n<T>* t, * q;
+        t = new n<T>;
+        t->info = i;
+        t->priority = p;
+        if (f == NULL || p > f->priority)
+        {
+            t->next = f;
+            f = t;
+        }
+        else
+        {
+            q = f;
+            while (q->next != NULL && q->next->priority >= p)
+                q = q->next;
+            t->next = q->next;
+            q->next = t;
+        }
+    }
+
     void delet()
     {
         count--;
 
-        n* t;
-        if (f == NULL) //if queue is null
-            cout << "Queue Underflow\n";
+        n<T>* t;
+        if (f == NULL) return; //if queue is null, return
         else
         {
             t = f;
-            cout << "Deleted item is: " << t->info << endl;
             f = f->next;
             free(t);
         }
     }
-    bool peek(T& frntEntry) const
+
+    bool isEmpty() const
     {
+        if (f == nullptr)
+            return true;
+        else
+            return false;
+    }
+
+    bool dequeue(T& frntEntry) 
+    {
+        count--;
+
         if (isEmpty())
             return false;
 
+        n<T>* nodeToDeletePtr = f;
         frntEntry = f->info;
+        f = f->next;
+       
+        // Free memory reserved by the dequeued node
+        delete nodeToDeletePtr;
         return true;
-
     }
 
-
-    void show() //print queue {
+    void show() //print queue
     {
-        n* ptr;
+       n<T>* ptr;
         ptr = f;
         if (f == NULL)
             cout << "Queue is empty\n";

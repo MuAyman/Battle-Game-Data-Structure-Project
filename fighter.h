@@ -1,11 +1,11 @@
 #pragma once
-//#include "active.h"
-#include"Enemies/Enemy.h"
-class fighter : public Enemy
+#include "Enemies/Enemy.h"
+class Fighter :
+    public Enemy
 {
-protected:
-	int Dfs; //Damage a fighter causes to Castle
-public:
-	int calculateDFS(int power, int Distance);
-};
 
+public:
+    Fighter(int id, int arr, double h, double p, double rel, double spd);
+    void Move();
+    void Act();
+};
