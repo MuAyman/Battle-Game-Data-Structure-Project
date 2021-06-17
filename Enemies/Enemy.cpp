@@ -123,6 +123,11 @@ void Enemy::DecrementDist()
 	if (Distance > MinDistance)
 		Distance--;
 }
+void Enemy::incrementDist()
+{
+	if (Distance > MaxDistance)
+		Distance++;
+}
 
 void Enemy::SetDistance(int d)
 {

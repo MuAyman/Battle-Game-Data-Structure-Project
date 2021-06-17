@@ -15,22 +15,24 @@ Healer::Healer(int id, int arr, double h, double p, double rel, double spd)
 
 void Healer::Move()
 {
+
 	for (int i = 0; i = Speed - 1; i++)
 	{
-		DecrementDist();
+			DecrementDist();
+			incrementDist();
 	}
+
 }
 
-void Healer::Act()
+void Healer::Act(Enemy* h, Enemy* d)
 {
-	Enemy* e;
-	Enemy* d;
-	if (e->GetType() == HEALER && !e->GetFrosted() && !d->GetFrosted() && (d->GetType() == FIGHTER || d->GetType() == FREEZER))
+	
+	if (!h->GetFrosted() && !d->GetFrosted() && (d->GetType() == FIGHTER || d->GetType() == FREEZER))
 	{
-		int distancebetweenenemies = (e->GetDistance()) - (d->GetDistance());
+		int distancebetweenenemies = (h->GetDistance()) - (d->GetDistance());
 		if (distancebetweenenemies <= 2)
 		{
-			d->SetH(d->GetHealth() + (20 / (100 * distancebetweenenemies)) * (e->GetHealth()));
+			d->SetH(d->GetHealth() + (20 / (100 * distancebetweenenemies)) * (h->GetHealth()));
 		}
 	}
 }

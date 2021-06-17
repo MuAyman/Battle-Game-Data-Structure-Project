@@ -1,1 +1,23 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(411,5): error MSB8020: The build tools for Visual Studio 2012 (Platform Toolset = 'v110') cannot be found. To build using the v110 build tools, please install Visual Studio 2012 build tools.  Alternatively, you may upgrade to the current Visual Studio tools by selecting the Project menu or right-click the solution, and then selecting "Retarget solution".
+﻿  healer.cpp
+d:\vs\cie205project_code_s2021\healer.cpp(19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Enemy.cpp
+d:\vs\cie205project_code_s2021\enemies\enemy.cpp(35): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+d:\vs\cie205project_code_s2021\enemies\enemy.cpp(40): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+d:\vs\cie205project_code_s2021\enemies\enemy.cpp(199): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+d:\vs\cie205project_code_s2021\enemies\enemy.cpp(217): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  Battle.cpp
+d:\vs\cie205project_code_s2021\battle.cpp(219): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+d:\vs\cie205project_code_s2021\battle.cpp(228): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\vs\cie205project_code_s2021\battle.cpp(230): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\vs\cie205project_code_s2021\battle.cpp(232): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+d:\vs\cie205project_code_s2021\healer.cpp(39): warning C4700: uninitialized local variable 'e' used
+d:\vs\cie205project_code_s2021\healer.cpp(39): warning C4700: uninitialized local variable 'd' used
+  Skipping... (no relevant changes detected)
+  freezer.cpp
+  fighter.cpp
+  GUI.cpp
+  Demo_Main.cpp
+  Castle.cpp
+  CastleDSProject.vcxproj -> D:\VS\CIE205Project_Code_S2021\.\Debug\CastleDSProject.exe
+  CastleDSProject.vcxproj -> .\Debug/CastleDSProject.pdb (Full PDB)

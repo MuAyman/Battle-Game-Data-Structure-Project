@@ -10,7 +10,7 @@ public:
     Healer(int id, int arr, double h, double p, double rel, double spd);
 
     void Move();
-    void Act();
+	void Act(Enemy* h, Enemy* d);
 
 	void ifHealing();
 	//void Heal();

@@ -70,7 +70,7 @@ public:
 
 
 	void DecrementDist();	// decremant the distance of each enemy
-
+	void incrementDist();
 	void effect_onSpeed();
 	void during_reloadperoid();
 	void ifFreezing();

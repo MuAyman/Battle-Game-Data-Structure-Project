@@ -515,7 +515,7 @@ void Battle::heal()
 
 		Healer* ptrH = dynamic_cast<Healer*>(e);
 
-		ptrH->Act();	//healing
+		ptrH->Act(e,ptrH);	//healing
 
 		tempQ.enqueue(ptrH);
 		countTempQ++;
