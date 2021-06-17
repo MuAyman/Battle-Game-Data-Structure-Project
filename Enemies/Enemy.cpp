@@ -201,6 +201,14 @@ double Enemy::GetDCE()
 int Enemy::freezingTime(int CastlePower, int CastleHealth)
 {
 	return	(CastlePower * CastleHealth) / (Health * Power * Distance);
+void  Enemy::SetChanged_Health(double CH_H)
+{
+	Changed_Health = CH_H;
+}
+int Enemy::freezingTime(int CastlePower, int CastleHealth)
+{
+	double t= (CastlePower * CastleHealth) / (Health * Power * Distance);
+	return	t;
 }
 
 

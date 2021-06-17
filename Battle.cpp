@@ -242,6 +242,95 @@ bool Battle::LoadingFunction()
 }
 
 
+void Battle::InteractiveMode()
+{
+	CurrentTimeStep = 0;
+	LoadingFunction();
+	AddAllListsToDrawingList();
+	pGUI->UpdateInterface(CurrentTimeStep);
+
+	while ((KilledCount <= EnemyCount) && !(BCastle.GetHealth() <= 0))
+	{
+		CurrentTimeStep++;
+		ActivateEnemies();
+		castleAttack();
+		enemiesAttack();
+		updateEnemies();
+
+		pGUI->ResetDrawingList();
+		AddAllListsToDrawingList();
+		pGUI->UpdateInterface(CurrentTimeStep);
+
+		pGUI->waitForClick();		// Action of proceeding
+	}
+
+	outputing();	// output processing
+}
+
+void Battle::outputing()
+{
+	ofstream outputfile;
+	Enemy* e;
+	int FD=0, KD=0, LT=0, FirstShotDelays=0, KillDaleys=0;
+
+	outputfile.open("Output.txt");
+
+	// game status
+	if (BattleStatus() == 0)
+		outputfile << "Game is WIN.\n";
+	else if (BattleStatus() == 1)
+		outputfile << "Game is LOSS.\n";
+	else if (BattleStatus() == 2)
+		outputfile << "Game is DRAWN.\n";
+
+	// enemies data
+	outputfile << "KTS ID     FD KD LT\n";
+
+	while (KilledCount != 0)
+	{
+		Killed.dequeue(e);
+		KilledCount--;
+		FD = e->GettFS() + e->GetArrvTime();
+		KD = e->GettKilled() + e->GettFS();
+		LT = FD + KD;
+		outputfile << e->GettKilled() << " " << e->GetID() << "     "
+			<< FD << " " << KD << " " << LT << "\n";
+
+		FirstShotDelays += FD;		// getting the sum of FD's
+		KillDaleys += KD;			// getting the sum of KD's
+	}
+
+	if (KilledCount < EnemyCount)	// in case the game was loss and there still some active or frossted enemies
+	{
+		while (ActiveFighterCount != 0)
+		{
+			ActiveFighter.dequeue(e);
+			ActiveFighterCount--;
+			FD = e->GettFS() + e->GetArrvTime();
+			KD = 0;		// since he's not dead asln
+			LT = CurrentTimeStep - e->GetArrvTime();	// since he's still alive
+			outputfile << 0 << " " << e->GetID() << "     "		// KTS is zero since he's still alive
+				<< FD << " " << KD << " " << LT << "\n";
+
+			FirstShotDelays += FD;		// getting the sum of FD's
+			KillDaleys += KD;			// getting the sum of KD's
+		}
+
+		while (ActiveFreezerCount != 0)
+		{
+			ActiveFreezer.dequeue(e);
+			ActiveFreezerCount--;
+			FD = e->GettFS() + e->GetArrvTime();
+			KD = 0;		// since he's not dead asln
+			LT = CurrentTimeStep - e->GetArrvTime();	// since he's still alive
+			outputfile << 0 << " " << e->GetID() << "     "		// KTS is zero since he's still alive
+				<< FD << " " << KD << " " << LT << "\n";
+
+			FirstShotDelays += FD;		// getting the sum of FD's
+			KillDaleys += KD;			// getting the sum of KD's
+		}
+
+
 
 void Battle::InteractiveMode()
 {
@@ -420,6 +509,7 @@ void Battle::castleAttack()
 {
 	if(!BCastle.GetFrosted())
 	{
+
 		Enemy* e;
 		while (ActiveFighter.dequeue(e)&& BCastle.GetN() !=0)
 		{
@@ -429,10 +519,58 @@ void Battle::castleAttack()
 			if ((e->GetType() == 0)|| (e->GetType() == 2))
 			{
 				e->SetDCE(BCastle.GetPower() / (e->GetDistance()));
+		Queue<Enemy*> all_Actives;
+		while (ActiveFighter.dequeue(e) || ActiveHealer.dequeue(e) || ActiveFreezer.dequeue(e))
+		{
+			all_Actives.enqueue(e);
+		}
+		while (all_Actives.dequeue(e)&& BCastle.GetN() !=0)
+		{
+			ActiveFighter.dequeue(e);
+			BCastle.SetN(BCastle.GetN() - 1);
+			if (e->GetType() == 0)
+			{
+				e->SetDCE(BCastle.GetPower() / (e->GetDistance()));
+				ActiveFighterCount--;
+			}
+			else if (e->GetType() == 2)
+			{
+				e->SetDCE(BCastle.GetPower() / (e->GetDistance()));
+				ActiveFreezerCount--;
 			}
 			else if (e->GetType() == 1)
 			{
 				e->SetDCE(0.5*BCastle.GetPower() / (e->GetDistance()));
+
+				ActiveHealerCount--;
+			}
+			e->SetChanged_Health((e->GetHealth()) - (e->GetDCE()));
+			e->effect_onSpeed();
+			switch (Ballence_ofCastle)
+			{
+			
+				case 1 :
+				{
+					BCastle.Attack_Bullets();
+				}
+				case 2:
+				{
+					BCastle.Attack_Ice();
+					e->SetFrosted(1);
+				}
+				case 3:
+				{
+					BCastle.Attack_Bullets();
+				}
+				case 4:
+				{
+					BCastle.Attack_Bullets();
+				}
+				case 5:
+				{
+					BCastle.Attack_Bullets();
+				}
+
 			}
 		}
 	}
@@ -440,37 +578,90 @@ void Battle::castleAttack()
 
 
 void Battle::enemiesAttack()
-{/*
-	if (BfEnemy.GetFrosted()) {}
+{
 
-	Enemy* e;
-	if (!e->Getreload_period())
-	{
-		if (e->GetStatus() == FIGHTER)
+		Enemy *e;
+		if (!e->Getreload_period())
 		{
-			int k;
-			double DFC = (k / ((e->GetDistance()) * (e->Getpower())));
-			if (e->GetHealth() < (0.5 * (e->GetInitialHealth())))
+			if (e->GetTYPE() == FIGHTER)
 			{
-				k = 0.5;
-			}
-			else
+				int k;
+				double DFC = (k / ((e->GetDistance())*(e->Getpower())));
+				if (e->GetChanged_Health < (0.5*(e->GetHealth())))
+				{
+					k = 0.5;
+				}
+				else
 
-			{
-				k = 1;
+				{
+					k = 1;
+				}
+				BCastle.SetTotal_damage(BCastle.GetTotal_damage += DFC);
+				e->setfirstshot(CurrentTimeStep);
 			}
-			BCastle.SetTotal_damage(BCastle.GetTotal_damage += DFC);
-			e->setfirstshot(CurrentTimeStep);
-		}
-		else if (e->GetTYPE() == FREEZER)
+			else if (e->GetTYPE() == FREEZER)
+			{
+				//double amountofice;
+				BCastle.setamountofice(BCastle.Getamountofice() + (e->Getpower() ));
+				if (BCastle.Getamountofice() == 20)
+					BCastle.SetFrosted(1);
+			}
+		}*/
+		Enemy* e;
+		Queue<Enemy*> tempQ;
+		int countTempQ = 0, tempcounter = 0;
+		tempcounter = ActiveFighterCount;
+
+		//for activefighter
+		for (int i = 0; i < tempcounter; i++)
 		{
-			//double amountofice;
-			BCastle.setamountofice(BCastle.Getamountofice() + (e->Getpower()));
-			if (BCastle.Getamountofice() == 20)
-				BCastle.SetFrosted(1);
+			ActiveFighter.dequeue(e);
+			ActiveFighterCount--;
+
+			Fighter* ptrF = dynamic_cast<Fighter*>(e);
+
+			ptrF->Act();	// dectremting the distance
+
+			tempQ.enqueue(ptrF);
+			countTempQ++;
 		}
-	}*/
-}
+
+		for (int i = 0; i < countTempQ; i++)
+		{
+			tempQ.dequeue(e);
+			ActiveFighter.insert(e, e->GetID());
+
+			ActiveFighterCount++;
+		}
+		//for activefreezer
+		tempcounter = ActiveFreezerCount;
+		for (int i = 0; i < tempcounter; i++)
+		{
+			ActiveFreezer.dequeue(e);
+			ActiveFreezerCount--;
+
+			Freezer* ptrFr = dynamic_cast<Freezer*>(e);
+
+			ptrFr->Act();	// dectremting the distance
+
+			tempQ.enqueue(ptrFr);
+			countTempQ++;
+		}
+		// re inserting the enemies again in the ActiveFreezer stack after
+		// updating the the distance
+		for (int i = 0; i < countTempQ; i++)
+		{
+			tempQ.dequeue(e);
+			ActiveFreezer.insert_Stack(e, e->GetID());	// switch the id by the real priority [for the team]
+			ActiveFreezerCount++;
+		}
+		// freeing the memory taken by the temp variables
+		for (int i = 0; i < tempcounter; i++)
+		{
+			tempQ.dequeue(e);
+			delete e;
+		}
+	}
 
 void Battle::heal()
 {

@@ -73,13 +73,24 @@ int Castle::GetFire() const
 {
 	return Fire;
 }
+<<<<<< < HEAD
 
-void Castle::Attack()
+	void Castle::Attack();
+void Castle::Attack_Bullets()
 {
 
+	Fire--;
+}
+void Castle::Attack_Ice()
+{
+	Ice--;
 }
 
 void Castle::ifAttack()
 {
-	if (!Frosted) { Attack(); }     
+	if (!Frosted) 
+	{
+		Attack_Bullets();
+		Attack_Ice();
+	}
 }

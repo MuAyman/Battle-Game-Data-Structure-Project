@@ -24,10 +24,14 @@ protected:
 	int t_frozen;		// the time needed for the frozen to melt and back active again
 	int t_killed;		// the time when the enemy got killed
 	int t_firstShot;	// the first shot time of each enemy
-
 	double Health;
 	bool reload;
 	double DCE;   //Damage to an enemy by a castle bullet (not applicable for ice throws)
+	const double Health; //Constant as we need its value stored 
+	bool reload;
+	double DCE;   //Damage to an enemy by a castle bullet (not applicable for ice throws)
+	double Changed_Health; //The original health after Changing it by castle attack
+	// we needed to separate the original health of the changed one to be able to compare them.
 
 public:
 	Enemy(int id, int typ, int arr, double h, double p, double rel, double spd);
@@ -65,8 +69,7 @@ public:
 	void SetFrosted(bool F);
 	void SETt_Frosted(int t);
 	void SetDCE(double dce);
-
-
+	void SetChanged_Health(double CH_H);
 	void DecrementDist();	// decremant the distance of each enemy
 
 	void effect_onSpeed();

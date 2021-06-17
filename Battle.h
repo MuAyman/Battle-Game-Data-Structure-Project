@@ -17,8 +17,6 @@ private:
 	int EnemyCount, CurrentTimeStep=0;	//the total number of enemies in the game
 	int InactiveCount=0, ActiveFighterCount=0, ActiveHealerCount=0,
 		ActiveFreezerCount=0, FrostedCount=0, KilledCount=0;	//no. of enemies (Active, Frosted, killed so far)
-
-///////////////////////////////////////////////	Riham ?????????????????
 Castle* cas;
 //Fighter BfEnemy;
 double DCE;                            //Damage to an enemy by a castle bullet (not applicable for ice throws)
@@ -32,7 +30,17 @@ double DCE;                            //Damage to an enemy by a castle bullet (
 	Priority_Queue<Enemy*> ActiveFreezer;		//Priority Queue of freezer enemies
 	Queue<Enemy*> Killed;						//Queue of Killed enemies
 	Priority_Queue<Enemy*> Frosted;				//Priority Queue of frosted enemies
-
+	Enemy* e;
+    Castle* cas;
+    Fighter BfEnemy;
+    double DCE;                                 //Damage to an enemy by a castle bullet (not applicable for ice throws)
+	Queue<Enemy*> Inactive;						//Queue of inactive enemies
+	Priority_Queue<Enemy*> ActiveFighter;		//Priority Queue of active fighters
+	Priority_Queue<Enemy*> ActiveHealer;		//Priority Stack of active Healer
+	Priority_Queue<Enemy*> ActiveFreezer;		//Priority Queue of freezer enemies
+	Queue<Enemy*> Killed;						//Queue of Killed enemies
+	Priority_Queue<Enemy*> Frosted;				//Priority Queue of frosted enemies
+	int Ballence_ofCastle = 1;                      // to decide the castle will throw ice or bullets
 public:
 
 	Battle();
@@ -49,10 +57,7 @@ public:
 	bool LoadingFunction();		// loads all enemies info from the input file
 	void outputing();
 
-	//Hajer ????
-	void heal();		//?????????
-
-
+	void heal();		
 	void InteractiveMode();
 	void StepByStepMode();
 	void SilentMode();
