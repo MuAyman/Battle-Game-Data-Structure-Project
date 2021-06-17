@@ -6,6 +6,7 @@
 #include "Priority_Queue.h"
 #include "ArrayStack.h"
 #include "GUI\GUI.h"
+#include "fighter.h"
 
 // it is the controller of the project
 class Battle
@@ -13,18 +14,27 @@ class Battle
 private:
 	GUI* pGUI;
 	Castle BCastle;
-	int EnemyCount, CurrentTimeStep;	//the actual number of enemies in the game
-	int InactiveCount, ActiveFighterCount, ActiveHealerCount,
-		ActiveFreezerCount, FrostedCount, KilledCount;	//no. of enemies (Active, Frosted, killed so far)
+	int EnemyCount, CurrentTimeStep=0;	//the total number of enemies in the game
+	int InactiveCount=0, ActiveFighterCount=0, ActiveHealerCount=0,
+		ActiveFreezerCount=0, FrostedCount=0, KilledCount=0;	//no. of enemies (Active, Frosted, killed so far)
 
-	Enemy AllEnemies[MaxEnemyCount];		// This Array of All Enemies (objects)
-								  			
-	Queue<Enemy*> Inactive;					//Queue of inactive enemies
-	Priority_Queue<Enemy*> ActiveFighter;	//Priority Queue of active fighters
-	ArrayStack<Enemy*> ActiveHlealer;		//Stack of active Healer
-	Queue<Enemy*> ActiveFreezer;			//Queue of freezer enemies
+///////////////////////////////////////////////	Riham ?????????????????
+Castle* cas;
+//Fighter BfEnemy;
+double DCE;                            //Damage to an enemy by a castle bullet (not applicable for ice throws)
+
+///////////////////////////////////////////
+
+
+	Queue<Enemy*> Inactive;						//Queue of inactive enemies
+	Priority_Queue<Enemy*> ActiveFighter;		//Priority Queue of active fighters
+	Priority_Queue<Enemy*> ActiveHlealer;		//Priority Stack of active Healer
+	Priority_Queue<Enemy*> ActiveFreezer;		//Priority Queue of freezer enemies
+	Queue<Enemy*> Killed;						//Queue of Killed enemies
+	Priority_Queue<Enemy*> Frosted;				//Priority Queue of frosted enemies
+
 public:
-	
+
 	Battle();
 	void AddAllListsToDrawingList();	//DONE	//Add enemy lists (inactive, active,.....) to drawing list to be displayed on user interface
 	Castle * GetCastle();
@@ -33,10 +43,19 @@ public:
 
 	void castleAttack();
 	void enemiesAttack();
-	void heal();
 
-	bool LoadingFunction();
-	void SimpleSimulator();
+	void updateEnemies();		// updates enemies status and distance
+	GAME_STATUS BattleStatus();			// returns how the battle ended (win, loss, or withdraw)
+	bool LoadingFunction();		// loads all enemies info from the input file
+	void outputing();
+
+	
+
+	void heal();		
+	int getcurrenttimestep() const;
+
+	void InteractiveMode();
+	void StepByStepMode();
+	void SilentMode();
 
 };
-
