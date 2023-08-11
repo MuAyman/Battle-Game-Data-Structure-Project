@@ -6,7 +6,7 @@ Your system (your program) will receive the information about a list of enemies 
             - Health: The starting health of the enemy.
             - Power: The power of the enemy.
             - Reload Period: Time for an enemy to reload its weapon.
-            - Speed: number of meters an enemy can move in a single time step.
+            - Speed: the number of meters an enemy can move in a single time step.
             - Type: fighter, freezer, or healer
             
 # Simulation Approach & Assumptions
@@ -55,9 +55,8 @@ As mentioned in the game rules, a castle picks at most N enemies (in total) to a
           
           1. First attack fighters. The castle should pick fighters depending on their distance, power, and health, status (active or frosted), remaining time steps for an enemy to end reload period. Think about a suitable formula to give priority to each fighter according to at least four of the above factors. Then pick higher-priority fighters first.
           2. Then (if N is not exhausted yet), pick healers to attack. A fresh healer who has just joined the forces is picked first. This means that healers are picked in the reverse order of their arrival (Last-Come-First-Serve)
-          3. Finally (if N is not exhausted yet) pick freezers to attack. A freezer that arrived first
-should be attacked first (First-Come-First-Serve).
+          3. Finally (if N is not exhausted yet) pick freezers to attack. A freezer that arrived first should be attacked first (First-Come-First-Serve).
 
-
+            
 
    
